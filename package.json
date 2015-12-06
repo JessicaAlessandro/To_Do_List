@@ -1,0 +1,28 @@
+{
+  "name": "todo_list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JessicaAlessandro/todo_list.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JessicaAlessandro/todo_list/issues"
+  },
+  "homepage": "https://github.com/JessicaAlessandro/todo_list#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.9",
+    "morgan": "^1.6.1",
+    "node-debugger": "^1.0.0",
+    "nodemon": "^1.8.1"
+  }
+}

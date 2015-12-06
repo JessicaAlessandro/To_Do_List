@@ -1,0 +1,56 @@
+
+<html ng-app="todoList">
+  <head>
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="js/standard/angular.min.js"></script>
+
+    <script src="js/controllers/main.js"></script>
+    <script src="js/services/todos.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+
+  <body ng-controller="mainController">
+
+    <div class="jumbotron text-center">
+      <h1>ToDo List:</h1>
+    </div>
+
+    <div id="todo-list" class="col-md-8">
+      <div class="input-group">
+        <ul class="input-group list-group">
+          <div class="input-group-item">
+            <li class="list-group-item" ng-repeat="task in tasks">
+              <button type="button"
+                      class="btn btn-danger badge"
+                      ng-click="deleteTask(task._id)">
+                <i class="glyphicon glyphicon-trash"></i>
+              </button>
+              <span>{{task.name}}</span>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <div id="todo-form">
+      <div class="col-md-8 text-center">
+        <form>
+          <div class="input-group">
+            <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+            <input type="text" class="form-control input-lg text-center" placeholder="define a task here" ng-model="formData.name">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary btn-lg" ng-click="createTask()">
+                <i class="glyphicon glyphicon-plus"></i>
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
