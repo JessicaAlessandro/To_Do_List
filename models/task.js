@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
-
 var TaskSchema = mongoose.Schema({
-    item    : String,
+    item : String,
+    done : Boolean
 });
  
 var Task = mongoose.model('Task', TaskSchema);

@@ -1,81 +1,32 @@
-// Test route
-router.get('/', function(req, res) {
-    res.json({ message: 'Welcome to the MEAN stack Todo list API!' });
-});
+angular.module('ToDoList', []).directive('ngtodolist', function() {
 
-// actual useful API routes
+  return {
+    controllerAs: 'todolist',
+    controller: ['$http', function ToDoListCtrl($http) {
+      this.$http = $http;
 
-// Routes that begin in /tasks
-router.route('/tasks')
-  .post(function(request, response) {
-    var task = new Task();
-    task.name = request.body.name;
 
-    task.save(function(err) {
-      if (err) {
-        response.send(err);
-      }
+      var self = this;
+      self.tasks = [];
+      self.totalTasks = 0;
 
-      Task.find(function(err, tasks) {
-        if (err) {
-          response.send(err);
-        }
-        response.json(tasks);
-      })
-    });
-  })
+      // 
+      // this.totalTasks = function() {
+      //   return self.tasks.length;
+      // }
 
-  .get(function(request, response) {
-    Task.find(function(err, tasks) {
-      if (err) {
-        response.send(err);
-      }
-      response.json(tasks);
-    })
-  })
+      // ==================
+      // all tasks
+      // ==================
+      this.getTasks = function() {
+        console.log('All your tasks!');
+        // ajax get request to /tasks
+        self.$http.get('/tasks').then(function(response) {
+          self.tasks = response.data;
+        });
 
-// Routes ending in :task_id
-router.route('/tasks/:task_id')
-  .get(function(request, response) {
-    Task.findById(request.params.task_id, function(err, task) {
-      if (err) {
-        response.send(err);
-      }
-      response.json(task);
-    })
-  })
-
-  .put(function(request, response) {
-    Task.findById(request.params.task_id, function(err, task) {
-      if (err) {
-        response.send(err);
-      }
-      task.name = request.body.name;
-
-      task.save(function(err) {
-        if (err) {
-          response.send(err);
-        }
-        response.json({ message: 'Task updated!' });
-      });
-    });
-  })
-
-  .delete(function(request, response) {
-    Task.remove({
-      _id: request.params.task_id
-    }, function(err, task) {
-      if (err) {
-        response.send(err);
-      }
-
-      Task.find(function(err, tasks) {
-        if (err) {
-          response.send(err);
-        }
-        response.json(tasks);
-      });
-    });
-  });
-
-module.exports = router;
+        return self.tasks;      
+      };        
+    }]; // close controller
+  }; // close return object
+}); // close angular module
