@@ -50,6 +50,7 @@ angular.module('ToDoList', []).directive('ngtodolist', function() {
         self.formTaskItem = task.item;
       };
 
+
       this.editTask = function() {
         // Now that it's populated
         var id = this.formTaskId;
