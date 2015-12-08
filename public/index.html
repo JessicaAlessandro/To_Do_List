@@ -1,32 +1,39 @@
-<html ng-app="ToDoList" lang="en">
+<html ng-app="ToDoList">
 <head>
   <title>Jessica's To Do List</title>
-  <link rel="stylesheet" type="text/css" href="public/styles.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script type="text/javascript" src="public/app.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+  <script type="text/javascript" src="app.js"></script>
 </head>
 <body>
-  <div id="header"> Jessica's To Do List</div>
-  <div id="content-wrapper" ngtodolist>    
-    <div id="tasks-container" ng-repeat="task in todolist.tasks">
+  <div class = "jumbotron" id="content-wrapper" ngtodolist>    
+    <h2 id="header"> Jessica's To Do List</h2>
+
+
+    <h4>Add A New Task</h4>  
+    <form>
+      <input class="form-control" rows="1" type="text" ng-model="todolist.formTaskItem">
+      <button type="button" class="btn btn-default" ng-click="todolist.addTask()">Add Task</button>
+      <button type="button" class="btn btn-default" ng-click="todolist.editTask()">Edit Task</button>
+    </form>
+
+
+    <div class = "container" id="tasks-container" ng-repeat="task in todolist.tasks">
         <span class="done-{{task.done}}">
           <input type="checkbox" ng-model="task.done">
           {{ task.item }}
         </span>
 
-        <button ng-click="todolist.populateForm(book)">Edit</button>
-        <button ng-click="todolist.deleteTask(book._id)">Delete</button>
-      </div>
-      <br>
-    </div> <!-- close books-container -->
+        <button type="button" class="btn btn-default btn-xs" ng-click="todolist.editForm(task)">Edit</button>
+        <button type="button" class="btn btn-default btn-xs" ng-click="todolist.deleteTask(task._id)">Delete</button>
+    </div>
+    
+    <h3>Total Tasks Remaining: {{ todolist.totalTasks() }}</h3>
 
-    <hr>
-    <h3>New Task</h3>  
-    <form>
-      <input type="text" ng-model="todolist.formBookTitle"><br>
-      <button ng-click="todolist.addBook()">Add Book</button>
-      <button ng-click="todolist.editBook()">Edit Book</button>
-    </form>
+
+
+    </div> <!-- close tasks-container -->
 
   </div><!-- End of content-wrapper -->
 </body>
