@@ -22,6 +22,10 @@ angular.module('ToDoList', []).directive('ngtodolist', function() {
       // ==================
       // all tasks
       // ==================
+            // window.onload = function() {
+      // this.getTasks()
+      // }
+
       this.getTasks = function() {
         console.log('All your tasks!');
         // ajax get request to /tasks

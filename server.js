@@ -20,7 +20,10 @@ app.use(morgan('dev'));
 // =============
 // DATABASE
 // =============
-mongoose.connect('mongodb://localhost/todo_list');
+// mongoose.connect('mongodb://localhost/todo_list');
+
+var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/todo_list';
+mongoose.connect(mongoUri);
 
 // =============
 // MODELS
