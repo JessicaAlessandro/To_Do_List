@@ -28,7 +28,7 @@ mongoose.connect(mongoUri);
 // =============
 // MODELS
 // =============
-var Task = require('./models/task');
+var Task = require('./models/Task');
 
 // =============
 // LISTENER
