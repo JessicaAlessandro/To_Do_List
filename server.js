@@ -3,7 +3,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     nodeDebugger = require('node-debugger'),
     morgan = require('morgan'),
-		port = process.env.PORT || 3000,
+		// port = process.env.PORT || 3000,
 		app = express();
 
 // =============
@@ -22,8 +22,12 @@ app.use(morgan('dev'));
 // =============
 // mongoose.connect('mongodb://localhost/todo_list');
 
-var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/todo_list';
-mongoose.connect(mongoUri);
+// var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/todo_list';
+// mongoose.connect(mongoUri);
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
 // =============
 // MODELS
@@ -33,7 +37,7 @@ var Task = require('./models/Task');
 // =============
 // LISTENER
 // =============
-app.listen(port);
+// app.listen(port);
 
 
 // =============
@@ -44,6 +48,13 @@ app.listen(port);
 // =============
 // ROUTES
 // =============
+app.get('/', function(req, res) {
+	Task.find().then(function(tasks) {
+		console.log(tasks);
+		res.send(tasks);
+		req.onload(tasks)
+	});
+});
 
 // Get request for all tasks. 
 app.get('/tasks', function(req, res) {
